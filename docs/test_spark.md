@@ -38,9 +38,9 @@ trabajos enviados desde Python (PyCharm).
 ### Ejecución desde terminal (opcional)
 2. Ejecutar script
 
-![img](images/containers.png)
+![img](../images/containers.png)
 
-![img](images/spark-master.png)
+![img](../images/spark-master.png)
 
 Ejecutamos en el contenedor spark master
 
@@ -50,7 +50,7 @@ Ejecutamos en el contenedor spark master
       --master spark://spark-master:7077 \
       /opt/bitnami/spark/scripts/test_spark.py
 
-![img](images/example.png)
+![img](../images/example.png)
 
 
 
