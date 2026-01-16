@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  spark-master:
+    image: public.ecr.aws/bitnami/spark:3.5
+    container_name: spark-master
+    environment:
+      - SPARK_MODE=master
+      - HOME=/tmp
+      - SPARK_SUBMIT_OPTS=-Divy.home=/tmp/.ivy2 -Dspark.jars.ivy=/tmp/.ivy2
+    ports:
+      - "8080:8080"   # Spark UI
+      - "7077:7077"   # Spark master (cluster)
+    volumes:
+      - ./data:/opt/bitnami/spark/data
+      - ./scripts:/opt/bitnami/spark/scripts
+
+  spark-worker-1:
+    image: public.ecr.aws/bitnami/spark:3.5
+    container_name: spark-worker-1
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+      - SPARK_WORKER_MEMORY=2G
+      - SPARK_WORKER_CORES=1
+    depends_on:
+      - spark-master
+    volumes:
+      - ./data:/opt/bitnami/spark/data
